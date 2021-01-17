@@ -13,7 +13,10 @@ class App extends React.Component {
           </HeadContainer>
 
           <Row row>
-            <TestCol col>1-1</TestCol>
+            <TestCol col>
+              <div>1-1</div>
+              <div>1-2</div>
+            </TestCol>
           </Row>
         </Container>
       </div>

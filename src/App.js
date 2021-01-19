@@ -12,13 +12,25 @@ const commodityData = [
 
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {amount: 0};
+  }
+  handleAmountCalculate = (commodityName) => {
+    const { amount } = this.state;
+    console.log("commodityName", commodityName);
+    this.setState({amount: amount + 1});
+  }
+
   render() {
+    const { amount } = this.state;
+    
     return (
       <div>
         <Container>
           <HeadContainer>
             <a>Home</a>
-            <div>ShopCard[0]</div>
+            <div>ShopCard[{amount}]</div>
           </HeadContainer>
 
           <CustomizeRow>
@@ -34,9 +46,9 @@ class App extends React.Component {
             {commodityData.map((data) =>  
               <Col col={3} key={data.id}>
                 <Test>
-                  <div>{data.commodityName}</div>
-                  <div>$ {data.price}</div>
-                  <button>加入購物車!</button>
+                  <CommodityName>{data.commodityName}</CommodityName>
+                  <Price>$ {data.price}</Price>
+                  <button onClick={()=>this.handleAmountCalculate(data)}>加入購物車!</button>
                 </Test>
             </Col>
             )}
@@ -50,11 +62,22 @@ class App extends React.Component {
 
 export default App;
 
+const Price = styled.div`
+  font-size: 15px;
+  margin-bottom: 10px;
+`;
+
+const CommodityName = styled.div`
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
+`;
+
 const Test = styled.div`
   border: solid 1px black;
   border-radius: 5px;
-  margin-bottom: 10px;
-  padding: 5px;
+  margin-bottom: 30px;
+  padding: 10px;
 `;
 
 const IntroductionSubtitle = styled.div`

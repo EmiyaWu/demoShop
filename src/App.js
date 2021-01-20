@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col } from 'styled-bootstrap-grid';
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 
 const commodityData = [
   {id:1, commodityName: "原味飯糰", price: 30, commodityimg:""},
@@ -9,7 +10,6 @@ const commodityData = [
   {id:4, commodityName: "肉球飯糰", price: 55, commodityimg:""},
   {id:5, commodityName: "總和飯糰", price: 60, commodityimg:""}
 ]
-
 
 class App extends React.Component {
   constructor(props) {
@@ -29,8 +29,12 @@ class App extends React.Component {
       <div>
         <Container>
           <HeadContainer>
-            <a>Home</a>
-            <div>ShopCard[{amount}]</div>
+            <a>
+              <Link to="/">Home</Link>
+            </a>
+            <div>
+              <Link to="/ShopCar">ShopCard[{amount}]</Link>
+            </div>
           </HeadContainer>
 
           <CustomizeRow>

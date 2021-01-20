@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row, Col } from 'styled-bootstrap-grid';
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
+import {connect} from 'react-redux';
 
 const commodityData = [
   {id:1, commodityName: "原味飯糰", price: 30, commodityimg:""},
@@ -14,26 +15,23 @@ const commodityData = [
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {amount: 0};
   }
   handleAmountCalculate = (commodityName) => {
-    const { amount } = this.state;
-    console.log("commodityName", commodityName);
-    this.setState({amount: amount + 1});
+    this.props.dispatch({type: "GETDATA", data: commodityName})
   }
 
   render() {
-    const { amount } = this.state;
+    const { shopAmount } = this.props;
     
     return (
       <div>
         <Container>
           <HeadContainer>
-            <a>
-              <Link to="/">Home</Link>
-            </a>
             <div>
-              <Link to="/ShopCar">ShopCard[{amount}]</Link>
+              <Link to="/">Home</Link>
+            </div>
+            <div>
+              <Link to="/ShopCar">ShopCard[{shopAmount}]</Link>
             </div>
           </HeadContainer>
 
@@ -64,7 +62,12 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  carData: state.carData,
+  shopAmount: state.shopAmount,
+})
+
+export default connect(mapStateToProps)(App);
 
 const Price = styled.div`
   font-size: 15px;

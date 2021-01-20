@@ -2,9 +2,7 @@ import React from "react";
 import { Container, Row, Col } from 'styled-bootstrap-grid';
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
-
-
-
+import {connect} from 'react-redux';
 
 class ShopCar extends React.Component {
   constructor(props) {
@@ -13,14 +11,15 @@ class ShopCar extends React.Component {
   }
 
   render() {
-    
+    const { carData } = this.props;
+    console.log("carData", carData)
     return (
       <div>
         <Container>
           <HeadContainer>
-            <a>
+            <div>
               <Link to="/">Home</Link>
-            </a>
+            </div>
           </HeadContainer>
           </Container>
       </div>
@@ -29,7 +28,10 @@ class ShopCar extends React.Component {
   }
 }
 
-export default ShopCar;
+const mapStateToProps = state => ({
+  carData: state.carData
+})
+export default connect(mapStateToProps)(ShopCar);
 
 const HeadContainer = styled.div`
   display: flex;

@@ -3,25 +3,16 @@ import { Container, Row, Col } from 'styled-bootstrap-grid';
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-
-const commodityData = [
-  {id:1, commodityName: "原味飯糰", price: 30, commodityimg:""},
-  {id:2, commodityName: "火腿飯糰", price: 35, commodityimg:""},
-  {id:3, commodityName: "起司飯糰", price: 40, commodityimg:""},
-  {id:4, commodityName: "肉球飯糰", price: 55, commodityimg:""},
-  {id:5, commodityName: "總和飯糰", price: 60, commodityimg:""}
-]
-
 class App extends React.Component {
   constructor(props) {
     super(props);
   }
-  handleAmountCalculate = (commodityName) => {
-    this.props.dispatch({type: "GETDATA", data: commodityName})
+  handleAmountCalculate = (commodityInformation) => {
+    this.props.dispatch({type: "GETDATA", data: commodityInformation})
   }
 
   render() {
-    const { shopAmount } = this.props;
+    const { shopAmount,  commodityData} = this.props;
     
     return (
       <div>
@@ -38,8 +29,8 @@ class App extends React.Component {
           <CustomizeRow>
             <IntroductionCol col>
               <IntroductionContainer>
-                <IntroductionSubject>Hi, Welcome 我的商城</IntroductionSubject>
-                <IntroductionSubtitle>目前商城正在特價中，所有商品一律八折!</IntroductionSubtitle>
+                <IntroductionSubject>Hi, Welcome 崩丸家族</IntroductionSubject>
+                <IntroductionSubtitle>目前崩丸正在優惠中，買飯糰送飯糰!</IntroductionSubtitle>
               </IntroductionContainer>
             </IntroductionCol>
           </CustomizeRow>
@@ -47,11 +38,11 @@ class App extends React.Component {
           <Row>
             {commodityData.map((data) =>  
               <Col col={3} key={data.id}>
-                <Test>
+                <CommodityContainer>
                   <CommodityName>{data.commodityName}</CommodityName>
                   <Price>$ {data.price}</Price>
                   <button onClick={()=>this.handleAmountCalculate(data)}>加入購物車!</button>
-                </Test>
+                </CommodityContainer>
             </Col>
             )}
           </Row>
@@ -63,6 +54,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  commodityData: state.commodityData,
   carData: state.carData,
   shopAmount: state.shopAmount,
 })
@@ -80,7 +72,7 @@ const CommodityName = styled.div`
   margin-bottom: 10px;
 `;
 
-const Test = styled.div`
+const CommodityContainer = styled.div`
   border: solid 1px black;
   border-radius: 5px;
   margin-bottom: 30px;

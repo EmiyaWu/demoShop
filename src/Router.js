@@ -8,7 +8,6 @@ class Router extends Component {
   render() {
     return (
       <div>
-        {/* The corresponding component will show here if the current URL matches the path */}
         <Route path="/" exact component={App} />
         <Route path="/ShopCar" component={ShopCar} />
       </div>

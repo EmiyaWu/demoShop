@@ -7,26 +7,20 @@ import {connect} from 'react-redux';
 class ShopCar extends React.Component {
   constructor(props) {
     super(props);
-    // this.state ={
-    //   carData: this.props.carData,
-    // }
     this.handleChange = this.handleChange.bind(this);
     
   }
 
   handleChange=(id,event)=> {
-    // const { carData } = this.props;
-    this.props.dispatch({type: "PRICEAMOUNT", data: event.target.value, id: id})
-    // this.setState({carData: carData})
+    this.props.dispatch({type: "PRICEAMOUNT", data: event.target.value, id: id});
   }
 
   handleDelete=(id)=>{
-    console.log('id',id);
+    this.props.dispatch({type: "DELETE", id: id});
   }
 
   render() {
     const { carData } = this.props;
-    console.log('this.props',this.props);
     return (
       <div>
         <Container>

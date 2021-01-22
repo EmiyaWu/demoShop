@@ -13,7 +13,6 @@ const initialState = {
 
 const initialCarData = [];
 
-
 export default (state = initialState, action) => {
 
     switch(action.type) {
@@ -31,21 +30,33 @@ export default (state = initialState, action) => {
                     action.data.amountValue.push({value: i, label: i});
                 }
                 initialCarData.push(action.data);
+                const insertInitialCarData = [...initialCarData];
                 return {
                     commodityData: state.commodityData,
-                    carData: initialCarData,
+                    carData: insertInitialCarData,
                     shopAmount: initialCarData.length
                 };
             };
         case "PRICEAMOUNT":
-            let findItem = initialCarData.find(x => x.id === action.id);
+            const findItem = initialCarData.find(x => x.id === action.id);
             findItem.singleItemTotalPrice = action.data*findItem.price;
+            const copyArray = [...initialCarData];
             return {
                 commodityData: state.commodityData,
-                carData: initialCarData,
+                carData: copyArray,
                 shopAmount: initialCarData.length
             }
-
+        case "DELETE":
+            const findDeleteItem = initialCarData.find(x => x.id === action.id);
+            const deleteItemIndex = initialCarData.indexOf(findDeleteItem);
+            findDeleteItem.amountValue.length = 0;
+            initialCarData.splice(deleteItemIndex,1);
+            const newInitialCarData = [...initialCarData];
+            return {
+                commodityData: state.commodityData,
+                carData: newInitialCarData,
+                shopAmount: newInitialCarData.length
+            }
         default:
             return state;
     };

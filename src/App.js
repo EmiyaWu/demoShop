@@ -7,6 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
   }
+  
   handleAmountCalculate = (commodityInformation) => {
     this.props.dispatch({type: "GETDATA", data: commodityInformation})
   }
@@ -34,7 +35,6 @@ class App extends React.Component {
               </IntroductionContainer>
             </IntroductionCol>
           </CustomizeRow>
-
           <Row>
             {commodityData.map((data) =>  
               <Col col={3} key={data.id}>

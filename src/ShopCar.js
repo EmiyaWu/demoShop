@@ -7,25 +7,26 @@ import {connect} from 'react-redux';
 class ShopCar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      amount: 1,
-      value: 1,
+    this.state ={
+      carData: this.props.carData,
     }
-    this.selectRef = React.createRef();
     this.handleChange = this.handleChange.bind(this);
     
   }
 
-  handleChange(event) {
-    const test = this.selectRef.current.value;
-    this.setState({amount: event.target.value})
-    // console.log('node', test);
-    console.log('aaa', event.target.value);
+  handleChange=(id,event)=> {
+    const { carData } = this.props;
+    // this.props.dispatch({type: "PRICEAMOUNT", data: event.target.value, id: id})
+    this.setState({carData: carData})
+  }
+
+  handleDelete=(id)=>{
+    console.log('id',id);
   }
 
   render() {
-    const { carData } = this.props;
-    const { amount } = this.state;
+    const { carData } = this.state;
+    console.log('carData',carData);
     return (
       <div>
         <Container>
@@ -51,7 +52,7 @@ class ShopCar extends React.Component {
                   <ListInformation col>商品名稱</ListInformation>
                   <ListInformation col>商品數量</ListInformation>
                   <ListInformation col>單價</ListInformation>
-                  <ListInformation col>小記</ListInformation>
+                  <ListInformation col>小計</ListInformation>
                   <ListInformation col>其他</ListInformation>
                 </Row>
                 <Row>
@@ -63,15 +64,15 @@ class ShopCar extends React.Component {
                   <CommodityContainer key={data.id}>
                     <CommodityContent col>{data.commodityName}</CommodityContent>
                     <CommodityContent col>
-                      <select onChange={this.handleChange} ref={this.selectRef}>
+                      <select value={data.amountValue.value} onChange={(e)=>this.handleChange(data.id,e)}>
                         {data.amountValue.map((amountData) =>
                             <option  key={amountData.value}  value={amountData.label}>{amountData.value}</option>
                         )}
                       </select>
                     </CommodityContent>
                     <CommodityContent col>{data.price}</CommodityContent>
-                    <CommodityContent col>{data.price}</CommodityContent>
-                    <CommodityContent col>取消</CommodityContent>
+                    <CommodityContent col>{data.singleItemTotalPrice}</CommodityContent>
+                    <CommodityContent col onClick={()=>this.handleDelete(data.id)}>取消</CommodityContent>
                   </CommodityContainer>
                 )}
                 <Row>

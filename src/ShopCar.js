@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'styled-bootstrap-grid';
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import { Navbar,Nav,Jumbotron,Card,Button,select } from 'react-bootstrap';
+import { Navbar,Nav,Jumbotron,Card,Button } from 'react-bootstrap';
 
 class ShopCar extends React.Component {
   constructor(props) {
@@ -11,7 +11,6 @@ class ShopCar extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     
   }
-
   handleChange=(id,event)=> {
     this.props.dispatch({type: "PRICEAMOUNT", data: event.target.value, id: id});
   }
@@ -22,10 +21,8 @@ class ShopCar extends React.Component {
 
   render() {
     const { carData } = this.props;
-    console.log('carData',carData);
     let sum = 0;
     carData.forEach((amountMoney)=>{
-      console.log('amountMoney',amountMoney.singleItemTotalPrice);
       sum+=amountMoney.singleItemTotalPrice;
       return sum;
     })
@@ -33,41 +30,28 @@ class ShopCar extends React.Component {
       <div>
         <HeadContainer>
           <Container>
-            <Navbar bg="dark" variant="dark">
-              {/* <Navbar.Brand href="/">崩丸家族</Navbar.Brand> */}
-              <NavHome to="/">崩丸家族</NavHome>
-              {/* <Nav className="mr-auto">
-                <Nav.Link href="/ShopCar">ShopCard[{shopAmount}]</Nav.Link>
-                <NavLink to="/ShopCar">ShopCard[{shopAmount}]</NavLink>
-              </Nav> */}
-            </Navbar>
+            <Row>
+              <Col col>
+                <CustomizeNavbar bg="dark" variant="dark">
+                  <NavHome to="/">崩丸家族</NavHome>
+                </CustomizeNavbar>
+              </Col>
+            </Row>
           </Container>
         </HeadContainer>
 
+        <Jumbotron fluid>
+          <Container>
+            <Row>
+              <Col col>
+                <h1>崩丸結帳</h1>
+                <p>目前崩丸正在優惠中，買飯糰送飯糰!</p>
+              </Col>
+            </Row>
+          </Container>
+        </Jumbotron>
+
         <Container>
-          {/* <HeadContainer>
-            <div>
-              <Link to="/">Home</Link>
-            </div>
-          </HeadContainer> */}
-
-          <CustomizeRow>
-            <IntroductionCol col>
-              {/* <IntroductionContainer>
-                <IntroductionSubject>崩丸廚房出菜</IntroductionSubject>
-                <IntroductionSubtitle></IntroductionSubtitle>
-              </IntroductionContainer> */}
-              <Jumbotron fluid>
-                <Container>
-                  <h1>崩丸結帳</h1>
-                  <p>
-                  目前崩丸正在優惠中，買飯糰送飯糰!
-                  </p>
-                </Container>
-              </Jumbotron>
-            </IntroductionCol>
-          </CustomizeRow>
-
           <Row>
             <Col col>
               <BuyCommodityContainer>
@@ -84,22 +68,23 @@ class ShopCar extends React.Component {
                   </Col>
                 </Row>
                 {carData.map((data) => 
-                  <CommodityContainer key={data.id}>
-                    <CommodityContent col>{data.commodityName}</CommodityContent>
-                    <CommodityContent col>
-                      <select value={data.amountValue.value} onChange={(e)=>this.handleChange(data.id,e)}>
-                        {data.amountValue.map((amountData) =>
-                            <option  key={amountData.value}  value={amountData.label}>{amountData.value}</option>
-                        )}
-                      </select>
-                    </CommodityContent>
-                    <CommodityContent col>{data.price}</CommodityContent>
-                    <CommodityContent col>{data.singleItemTotalPrice}</CommodityContent>
-                    <CommodityContent col>
-                      <Button onClick={()=>this.handleDelete(data.id)} variant="outline-danger">取消</Button>{' '}
-                    </CommodityContent>
-                    
-                  </CommodityContainer>
+                  <div  key={data.id}>
+                    <CommodityContainer>
+                      <CommodityContent col>{data.commodityName}</CommodityContent>
+                      <CommodityContent col>
+                        <CustomizeSelect value={data.selectValue} onChange={(e)=>this.handleChange(data.id,e)}>
+                          {data.amountValue.map((amountData) =>
+                              <option  key={amountData.value}  value={amountData.label}>{amountData.value}</option>
+                          )}
+                        </CustomizeSelect>
+                      </CommodityContent>
+                      <CommodityContent col>{data.price}</CommodityContent>
+                      <CommodityContent col>{data.singleItemTotalPrice}</CommodityContent>
+                      <CommodityContent col>
+                        <Button onClick={()=>this.handleDelete(data.id)} variant="outline-danger">取消</Button>{' '}
+                      </CommodityContent>
+                    </CommodityContainer>
+                  </div>
                 )}
                 <Row>
                   <Col>
@@ -115,7 +100,11 @@ class ShopCar extends React.Component {
               </BuyCommodityContainer>
             </Col>
           </Row>
-          </Container>
+        </Container>
+
+        <FooterContainer>
+          <Footerfont>崩丸集團歸屬 www.borm-wan.com</Footerfont>
+        </FooterContainer>
       </div>
       
     )
@@ -127,6 +116,27 @@ const mapStateToProps = state => ({
 })
 export default connect(mapStateToProps)(ShopCar);
 
+const Footerfont = styled.div`
+  text-align: center;
+  color: #fff;
+  padding: 10px 0;
+`;
+
+const FooterContainer = styled.div`
+  background-color: #343a40;
+  position:absolute;
+  width:100%;
+  bottom: 0;
+`
+
+const Commodity = styled.div`
+  /* margin: 10px 0; */
+`;
+
+const CustomizeSelect = styled.select`
+  min-width: 45px;
+`;
+
 const CommodityContent = styled(Col)`
   text-align: center;
   display: flex;
@@ -135,7 +145,8 @@ const CommodityContent = styled(Col)`
 `;
 
 const CommodityContainer = styled(Row)`
-  /* margin-bottom: 5px; */
+  margin-bottom: 5px;
+  margin-top: 5px;
 `;
 
 const ListLine = styled.div`
@@ -178,6 +189,16 @@ const CustomizeRow = styled(Row)`
   margin-bottom: 15px;
 `;
 
+const NavLink = styled(Link)`
+  color: rgba(255,255,255,.5);
+  padding: 0, .5rem;
+  
+  :hover {
+    color: rgba(255,255,255,.75);
+    text-decoration: none;
+  }
+`;
+
 const NavHome = styled(Link)`
   color: #fff;
   font-size: 1.25rem;
@@ -188,6 +209,11 @@ const NavHome = styled(Link)`
     text-decoration: none;
     color: #fff;
   }
+`;
+
+const CustomizeNavbar = styled(Navbar)`
+  padding: 5px 0;
+  justify-content: space-between;
 `;
 
 const HeadContainer = styled.div`

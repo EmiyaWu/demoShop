@@ -21,35 +21,32 @@ class App extends React.Component {
       <div>
         <HeadContainer>
           <Container>
-            <Navbar bg="dark" variant="dark">
-              {/* <Navbar.Brand href="/">崩丸家族</Navbar.Brand> */}
-              <NavHome to="/">崩丸家族</NavHome>
-              <Nav className="mr-auto">
-                {/* <Nav.Link href="/ShopCar">ShopCard[{shopAmount}]</Nav.Link> */}
-                <NavLink to="/ShopCar">ShopCard[{shopAmount}]</NavLink>
-              </Nav>
-            </Navbar>
+            <Row>
+              <Col col>
+                <CustomizeNavbar bg="dark" variant="dark">
+                  <NavHome to="/">崩丸家族</NavHome>
+                  <Nav>
+                    <NavLink to="/ShopCar">購物車[{shopAmount}]</NavLink>
+                  </Nav>
+                </CustomizeNavbar>
+              </Col>
+            </Row>
+            
           </Container>
         </HeadContainer>
+
+        <Jumbotron fluid>
+          <Container>
+            <Row>
+              <Col col>
+                <h1>崩丸家族</h1>
+                <p>目前崩丸正在優惠中，買飯糰送飯糰!</p>
+              </Col>
+            </Row>
+          </Container>
+        </Jumbotron>
         
         <Container>
-          <CustomizeRow>
-            <IntroductionCol col>
-              {/* <IntroductionContainer>
-                <IntroductionSubject>Hi, Welcome 崩丸家族</IntroductionSubject>
-                <IntroductionSubtitle>目前崩丸正在優惠中，買飯糰送飯糰!</IntroductionSubtitle>
-              </IntroductionContainer> */}
-
-              <Jumbotron fluid>
-                <Container>
-                  <h1>崩丸家族</h1>
-                  <p>
-                  目前崩丸正在優惠中，買飯糰送飯糰!
-                  </p>
-                </Container>
-              </Jumbotron>
-            </IntroductionCol>
-          </CustomizeRow>
           <Row>
             {commodityData.map((data) =>  
               <Col col={12} sm={6} md={4} lg={3} key={data.id}>
@@ -73,6 +70,12 @@ class App extends React.Component {
             )}
           </Row>
         </Container>
+
+        {/* <FooterContainer>
+          <Container>
+            <Footerfont>崩丸集團歸屬 www.borm-wan.com</Footerfont>
+          </Container>
+        </FooterContainer> */}
       </div>
       
     )
@@ -87,48 +90,22 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps)(App);
 
-const Price = styled.div`
-  font-size: 15px;
-  margin-bottom: 10px;
+const Footerfont = styled.div`
+  text-align: center;
+  color: #fff;
+  padding: 10px 0;
 `;
 
-const CommodityName = styled.div`
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 10px;
-`;
+const FooterContainer = styled.div`
+  background-color: #343a40;
+  position:absolute;
+  width:100%;
+  bottom: 0;
+`
 
-const CommodityContainer = styled.div`
-  border: solid 1px black;
-  border-radius: 5px;
-  margin-bottom: 30px;
-  padding: 10px;
-`;
 
-const IntroductionSubtitle = styled.div`
-  margin: 5px 0 0 0;
-  font-size: 12px;
-`;
-
-const IntroductionSubject = styled.div`
-  margin: 0 0 5px 0;
-  font-size: 20px;
-  font-weight: bold;
-`;
-
-const IntroductionContainer = styled.div`
-  border: solid 1px gray;
-  border-radius: 10px;
-  padding: 10px 5px;
-`;
 const CustomizeCard = styled(Card)`
   margin-bottom: 30px;
-`;
-
-const IntroductionCol = styled(Col)``;
-
-const CustomizeRow = styled(Row)`
-  margin-bottom: 15px;
 `;
 
 const NavLink = styled(Link)`
@@ -151,6 +128,11 @@ const NavHome = styled(Link)`
     text-decoration: none;
     color: #fff;
   }
+`;
+
+const CustomizeNavbar = styled(Navbar)`
+  padding: 5px 0;
+  justify-content: space-between;
 `;
 
 const HeadContainer = styled.div`

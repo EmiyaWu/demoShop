@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'styled-bootstrap-grid';
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
+import { Navbar,Nav,Jumbotron,Card,Button,select } from 'react-bootstrap';
 
 class ShopCar extends React.Component {
   constructor(props) {
@@ -21,21 +22,49 @@ class ShopCar extends React.Component {
 
   render() {
     const { carData } = this.props;
+    console.log('carData',carData);
+    let sum = 0;
+    carData.forEach((amountMoney)=>{
+      console.log('amountMoney',amountMoney.singleItemTotalPrice);
+      sum+=amountMoney.singleItemTotalPrice;
+      return sum;
+    })
     return (
       <div>
+        <HeadContainer>
+          <Container>
+            <Navbar bg="dark" variant="dark">
+              {/* <Navbar.Brand href="/">崩丸家族</Navbar.Brand> */}
+              <NavHome to="/">崩丸家族</NavHome>
+              {/* <Nav className="mr-auto">
+                <Nav.Link href="/ShopCar">ShopCard[{shopAmount}]</Nav.Link>
+                <NavLink to="/ShopCar">ShopCard[{shopAmount}]</NavLink>
+              </Nav> */}
+            </Navbar>
+          </Container>
+        </HeadContainer>
+
         <Container>
-          <HeadContainer>
+          {/* <HeadContainer>
             <div>
               <Link to="/">Home</Link>
             </div>
-          </HeadContainer>
+          </HeadContainer> */}
 
           <CustomizeRow>
             <IntroductionCol col>
-              <IntroductionContainer>
+              {/* <IntroductionContainer>
                 <IntroductionSubject>崩丸廚房出菜</IntroductionSubject>
                 <IntroductionSubtitle></IntroductionSubtitle>
-              </IntroductionContainer>
+              </IntroductionContainer> */}
+              <Jumbotron fluid>
+                <Container>
+                  <h1>崩丸結帳</h1>
+                  <p>
+                  目前崩丸正在優惠中，買飯糰送飯糰!
+                  </p>
+                </Container>
+              </Jumbotron>
             </IntroductionCol>
           </CustomizeRow>
 
@@ -66,12 +95,21 @@ class ShopCar extends React.Component {
                     </CommodityContent>
                     <CommodityContent col>{data.price}</CommodityContent>
                     <CommodityContent col>{data.singleItemTotalPrice}</CommodityContent>
-                    <CommodityContent col onClick={()=>this.handleDelete(data.id)}>取消</CommodityContent>
+                    <CommodityContent col>
+                      <Button onClick={()=>this.handleDelete(data.id)} variant="outline-danger">取消</Button>{' '}
+                    </CommodityContent>
+                    
                   </CommodityContainer>
                 )}
                 <Row>
                   <Col>
                   <ListLine />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col col>
+                    <div>總計:{sum}</div>
+                    <button>送出</button>
                   </Col>
                 </Row>
               </BuyCommodityContainer>
@@ -140,8 +178,18 @@ const CustomizeRow = styled(Row)`
   margin-bottom: 15px;
 `;
 
+const NavHome = styled(Link)`
+  color: #fff;
+  font-size: 1.25rem;
+  white-space: nowrap;
+  line-height:inherit;
+  margin-right: 20px;
+  :hover {
+    text-decoration: none;
+    color: #fff;
+  }
+`;
+
 const HeadContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
+  background-color: #343a40;
 `

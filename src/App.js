@@ -63,12 +63,6 @@ class App extends React.Component {
             )}
           </Row>
         </Container>
-
-        {/* <FooterContainer>
-          <Container>
-            <Footerfont>崩丸集團歸屬 www.borm-wan.com</Footerfont>
-          </Container>
-        </FooterContainer> */}
       </div>
       
     )
@@ -82,24 +76,6 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps)(App);
-
-const TestDiv = styled.div`
-background-image:url("src\picture\origin.jpg");
-`;
-
-const Footerfont = styled.div`
-  text-align: center;
-  color: #fff;
-  padding: 10px 0;
-`;
-
-const FooterContainer = styled.div`
-  background-color: #343a40;
-  position:absolute;
-  width:100%;
-  bottom: 0;
-`
-
 
 const CustomizeCard = styled(Card)`
   margin-bottom: 30px;

@@ -1,11 +1,11 @@
 const initialState = {
     commodityData: [
-        {id:1, commodityName: "原味飯糰", price: 30, singleItemTotalPrice:30, commodityimg:"./picture/origin.jpg", commodityAmount: 30, amountValue: [],selectValue: 1},
+        {id:1, commodityName: "原味飯糰", price: 30, singleItemTotalPrice:30, commodityimg:"./picture/origin.jpg", commodityAmount: 10, amountValue: [],selectValue: 1},
         {id:2, commodityName: "火腿飯糰", price: 35, singleItemTotalPrice:35, commodityimg:"./picture/ham.jpg", commodityAmount: 10, amountValue: [],selectValue: 1},
         {id:3, commodityName: "起司飯糰", price: 40, singleItemTotalPrice:40, commodityimg:"./picture/cheese.jpg", commodityAmount: 10, amountValue: [],selectValue: 1},
         {id:4, commodityName: "素食飯糰", price: 55, singleItemTotalPrice:55, commodityimg:"./picture/Vegetarianfood.jpg", commodityAmount: 10, amountValue: [],selectValue: 1},
         {id:5, commodityName: "綜合飯糰", price: 60, singleItemTotalPrice:60, commodityimg:"./picture/comprehensive.jpg", commodityAmount: 10, amountValue: [],selectValue: 1},
-        {id:6, commodityName: "蹦丸紅茶", price: 10, singleItemTotalPrice:10, commodityimg:"./picture/blacktea.jpg", commodityAmount: 5, amountValue: [],selectValue: 1}
+        {id:6, commodityName: "蹦丸紅茶", price: 10, singleItemTotalPrice:10, commodityimg:"./picture/blacktea.jpg", commodityAmount: 20, amountValue: [],selectValue: 1}
     ],
     carData: [],
     shopAmount: 0,
@@ -40,6 +40,7 @@ export default (state = initialState, action) => {
         case "PRICEAMOUNT":
             const findItem = initialCarData.find(x => x.id === action.id);
             findItem.singleItemTotalPrice = action.data*findItem.price;
+            
             findItem.selectValue = action.data;
             const copyArray = [...initialCarData];
             return {
@@ -50,9 +51,11 @@ export default (state = initialState, action) => {
         case "DELETE":
             const findDeleteItem = initialCarData.find(x => x.id === action.id);
             const deleteItemIndex = initialCarData.indexOf(findDeleteItem);
+
             findDeleteItem.selectValue = 1;
             findDeleteItem.singleItemTotalPrice = findDeleteItem.price*1;
             findDeleteItem.amountValue.length = 0;
+
             initialCarData.splice(deleteItemIndex,1);
             const newInitialCarData = [...initialCarData];
             return {

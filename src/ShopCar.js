@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'styled-bootstrap-grid';
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
-import { Navbar,Nav,Jumbotron,Card,Button } from 'react-bootstrap';
+import { Navbar,Jumbotron,Button } from 'react-bootstrap';
 
 class ShopCar extends React.Component {
   constructor(props) {
@@ -21,11 +21,13 @@ class ShopCar extends React.Component {
 
   render() {
     const { carData } = this.props;
+
     let sum = 0;
     carData.forEach((amountMoney)=>{
       sum+=amountMoney.singleItemTotalPrice;
       return sum;
     })
+
     return (
       <div>
         <HeadContainer>
@@ -67,25 +69,29 @@ class ShopCar extends React.Component {
                   <ListLine />
                   </Col>
                 </Row>
-                {carData.map((data) => 
-                  <div  key={data.id}>
-                    <CommodityContainer>
-                      <CommodityContent col>{data.commodityName}</CommodityContent>
-                      <CommodityContent col>
-                        <CustomizeSelect value={data.selectValue} onChange={(e)=>this.handleChange(data.id,e)}>
-                          {data.amountValue.map((amountData) =>
-                              <option  key={amountData.value}  value={amountData.label}>{amountData.value}</option>
-                          )}
-                        </CustomizeSelect>
-                      </CommodityContent>
-                      <CommodityContent col>{data.price}</CommodityContent>
-                      <CommodityContent col>{data.singleItemTotalPrice}</CommodityContent>
-                      <CommodityContent col>
-                        <Button onClick={()=>this.handleDelete(data.id)} variant="outline-danger">取消</Button>{' '}
-                      </CommodityContent>
-                    </CommodityContainer>
-                  </div>
-                )}
+                {carData.length === 0 ?
+                  <NoCommodity>目前沒有訂購任何崩丸哦!</NoCommodity>
+                  :
+                  carData.map((data) => 
+                    <div  key={data.id}>
+                      <CommodityContainer>
+                        <CommodityContent col>{data.commodityName}</CommodityContent>
+                        <CommodityContent col>
+                          <CustomizeSelect value={data.selectValue} onChange={(e)=>this.handleChange(data.id,e)}>
+                            {data.amountValue.map((amountData) =>
+                                <option  key={amountData.value}  value={amountData.label}>{amountData.value}</option>
+                            )}
+                          </CustomizeSelect>
+                        </CommodityContent>
+                        <CommodityContent col>{data.price}</CommodityContent>
+                        <CommodityContent col>{data.singleItemTotalPrice}</CommodityContent>
+                        <CommodityContent col>
+                          <Button onClick={()=>this.handleDelete(data.id)} variant="outline-danger">取消</Button>{' '}
+                        </CommodityContent>
+                      </CommodityContainer>
+                    </div>
+                  )
+                }
                 <Row>
                   <Col>
                   <ListLine />
@@ -93,18 +99,16 @@ class ShopCar extends React.Component {
                 </Row>
                 <Row>
                   <Col col>
-                    <div>總計:{sum}</div>
-                    <button>送出</button>
+                    <TotalContainer>
+                      <div>總計:{sum}</div>
+                      <button>送出</button>
+                    </TotalContainer>
                   </Col>
                 </Row>
               </BuyCommodityContainer>
             </Col>
           </Row>
         </Container>
-
-        {/* <FooterContainer>
-          <Footerfont>崩丸集團歸屬 www.borm-wan.com</Footerfont>
-        </FooterContainer> */}
       </div>
       
     )
@@ -116,21 +120,10 @@ const mapStateToProps = state => ({
 })
 export default connect(mapStateToProps)(ShopCar);
 
-const Footerfont = styled.div`
-  text-align: center;
-  color: #fff;
-  padding: 10px 0;
-`;
-
-const FooterContainer = styled.div`
-  background-color: #343a40;
-  position:absolute;
-  width:100%;
-  bottom: 0;
-`
-
-const Commodity = styled.div`
-  /* margin: 10px 0; */
+const TotalContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 `;
 
 const CustomizeSelect = styled.select`
@@ -164,39 +157,12 @@ const BuyCommodityContainer = styled.div`
   border-radius: 10px;
   padding: 10px 5px;
   
-`
-
-const IntroductionSubtitle = styled.div`
-  margin: 5px 0 0 0;
-  font-size: 12px;
 `;
 
-const IntroductionSubject = styled.div`
-  margin: 0 0 5px 0;
-  font-size: 20px;
+const NoCommodity = styled.div`
+  text-align: center;
   font-weight: bold;
-`;
-
-const IntroductionContainer = styled.div`
-  border: solid 1px gray;
-  border-radius: 10px;
-  padding: 10px 5px;
-`;
-
-const IntroductionCol = styled(Col)``;
-
-const CustomizeRow = styled(Row)`
-  margin-bottom: 15px;
-`;
-
-const NavLink = styled(Link)`
-  color: rgba(255,255,255,.5);
-  padding: 0, .5rem;
-  
-  :hover {
-    color: rgba(255,255,255,.75);
-    text-decoration: none;
-  }
+  color: gray;
 `;
 
 const NavHome = styled(Link)`

@@ -102,9 +102,9 @@ class ShopCar extends React.Component {
           </Row>
         </Container>
 
-        <FooterContainer>
+        {/* <FooterContainer>
           <Footerfont>崩丸集團歸屬 www.borm-wan.com</Footerfont>
-        </FooterContainer>
+        </FooterContainer> */}
       </div>
       
     )

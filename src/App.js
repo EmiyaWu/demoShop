@@ -50,8 +50,7 @@ class App extends React.Component {
             {commodityData.map((data) =>  
               <Col col={12} sm={6} md={4} lg={3} key={data.id}>
                 <CustomizeCard>
-                  <Card.Img variant="top" src="https://g.udn.com.tw/upfiles/B_AN/ansercomtw/PSN_PHOTO/332/f_23482332_1.jpg" />
-                  <Card.Img variant="top" src="public\picture\origin.jpg" />
+                  <Card.Img variant="top" src={data.commodityimg} />
                   <Card.Body>
                     <Card.Title>{data.commodityName}</Card.Title>
                     <Card.Text>

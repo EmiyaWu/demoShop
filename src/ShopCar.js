@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col } from 'styled-bootstrap-grid';
+import { Container, Row, Col, media } from 'styled-bootstrap-grid';
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -86,7 +86,7 @@ class ShopCar extends React.Component {
                         <CommodityContent col>{data.price}</CommodityContent>
                         <CommodityContent col>{data.singleItemTotalPrice}</CommodityContent>
                         <CommodityContent col>
-                          <Button onClick={()=>this.handleDelete(data.id)} variant="outline-danger">取消</Button>{' '}
+                          <CustomizeButton onClick={()=>this.handleDelete(data.id)} variant="outline-danger">取消</CustomizeButton>
                         </CommodityContent>
                       </CommodityContainer>
                     </div>
@@ -101,7 +101,7 @@ class ShopCar extends React.Component {
                   <Col col>
                     <TotalContainer>
                       <div>總計:{sum}</div>
-                      <button>送出</button>
+                      <CustomizeButton variant="primary">送出</CustomizeButton>
                     </TotalContainer>
                   </Col>
                 </Row>
@@ -124,10 +124,25 @@ const TotalContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+
+  ${media.xs`
+    font-size: 15px;
+  `}
 `;
 
 const CustomizeSelect = styled.select`
   min-width: 45px;
+
+  ${media.xs`
+    min-width: 10px;
+  `}
+`;
+
+const CustomizeButton = styled(Button)`
+  ${media.xs`
+    font-size: 10px;
+    padding: 1px;
+  `}
 `;
 
 const CommodityContent = styled(Col)`
@@ -135,6 +150,9 @@ const CommodityContent = styled(Col)`
   display: flex;
   align-items: center;
   justify-content: center;
+  ${media.xs`
+    font-size: 10px;
+  `}
 `;
 
 const CommodityContainer = styled(Row)`
@@ -149,7 +167,9 @@ const ListLine = styled.div`
 
 const ListInformation = styled(Col)`
   text-align: center;
-    
+  ${media.xs`
+    font-size: 10px;
+  `}
 `;
 
 const BuyCommodityContainer = styled.div`
@@ -163,6 +183,10 @@ const NoCommodity = styled.div`
   text-align: center;
   font-weight: bold;
   color: gray;
+
+  ${media.xs`
+    font-size: 15px;
+  `}
 `;
 
 const NavHome = styled(Link)`

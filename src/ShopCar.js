@@ -9,8 +9,8 @@ class ShopCar extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    
   }
+  
   handleChange=(id,event)=> {
     this.props.dispatch({type: "PRICEAMOUNT", data: event.target.value, id: id});
   }

@@ -31,7 +31,6 @@ class App extends React.Component {
                 </CustomizeNavbar>
               </Col>
             </Row>
-            
           </Container>
         </HeadContainer>
 
@@ -50,14 +49,9 @@ class App extends React.Component {
           <Row>
             {commodityData.map((data) =>  
               <Col col={12} sm={6} md={4} lg={3} key={data.id}>
-                {/* <CommodityContainer>
-                  <CommodityName>{data.commodityName}</CommodityName>
-                  <Price>$ {data.price}</Price>
-                  <button onClick={()=>this.handleAmountCalculate(data)}>加入購物車!</button>
-                </CommodityContainer> */}
-
                 <CustomizeCard>
-                  <Card.Img variant="top" src="https://placehold.it/286x180" />
+                  <Card.Img variant="top" src="https://g.udn.com.tw/upfiles/B_AN/ansercomtw/PSN_PHOTO/332/f_23482332_1.jpg" />
+                  <Card.Img variant="top" src="src\picture\origin.jpg" data-src="src\picture\origin.jpg" />
                   <Card.Body>
                     <Card.Title>{data.commodityName}</Card.Title>
                     <Card.Text>
@@ -89,6 +83,10 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps)(App);
+
+const TestDiv = styled.div`
+background-image:url("src\picture\origin.jpg");
+`;
 
 const Footerfont = styled.div`
   text-align: center;

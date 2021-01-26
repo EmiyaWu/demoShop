@@ -50,6 +50,8 @@ export default (state = initialState, action) => {
         case "DELETE":
             const findDeleteItem = initialCarData.find(x => x.id === action.id);
             const deleteItemIndex = initialCarData.indexOf(findDeleteItem);
+            findDeleteItem.selectValue = 1;
+            findDeleteItem.singleItemTotalPrice = findDeleteItem.price*1;
             findDeleteItem.amountValue.length = 0;
             initialCarData.splice(deleteItemIndex,1);
             const newInitialCarData = [...initialCarData];

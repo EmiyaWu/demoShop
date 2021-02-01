@@ -11,10 +11,12 @@ class ShopCar extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
   
+  // 計算商品數量及價錢
   handleChange=(id,event)=> {
     this.props.dispatch({type: "PRICEAMOUNT", data: event.target.value, id: id});
   }
 
+  // 刪除購物車指定物品
   handleDelete=(id)=>{
     this.props.dispatch({type: "DELETE", id: id});
   }

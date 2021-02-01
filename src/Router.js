@@ -1,14 +1,13 @@
-// /src/App.js
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import App from './App';
-import ShopCar from './ShopCar';
+import Home from './Home/Home';
+import ShopCar from './shopCar/ShopCar';
 
 class Router extends Component {
   render() {
     return (
       <div>
-        <Route path="/" exact component={App} />
+        <Route path="/" exact component={Home} />
         <Route path="/ShopCar" component={ShopCar} />
       </div>
     );

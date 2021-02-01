@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import App from './App';
 import {GridThemeProvider, BaseCSS} from 'styled-bootstrap-grid';
 import bootstrapGridTheme from './gridTheme';
 import { BrowserRouter, Switch } from 'react-router-dom';

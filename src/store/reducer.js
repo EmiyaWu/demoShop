@@ -16,6 +16,8 @@ const initialCarData = [];
 export default (state = initialState, action) => {
 
     switch(action.type) {
+
+        // 新增物品進入購物車內
         case "GETDATA":
             const identicalProduct = initialCarData.indexOf(action.data);
             if (identicalProduct !== -1) {
@@ -37,6 +39,8 @@ export default (state = initialState, action) => {
                     shopAmount: initialCarData.length
                 };
             };
+
+        // 當購物車內指定物品數量改變時也跟著改變總價格
         case "PRICEAMOUNT":
             const findItem = initialCarData.find(x => x.id === action.id);
             findItem.singleItemTotalPrice = action.data*findItem.price;
@@ -48,6 +52,8 @@ export default (state = initialState, action) => {
                 carData: copyArray,
                 shopAmount: initialCarData.length
             }
+
+        // 移除購物車內指定物品
         case "DELETE":
             const findDeleteItem = initialCarData.find(x => x.id === action.id);
             const deleteItemIndex = initialCarData.indexOf(findDeleteItem);

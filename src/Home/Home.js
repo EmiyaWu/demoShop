@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col } from 'styled-bootstrap-grid';
+import { Container, Row, Col, media } from 'styled-bootstrap-grid';
 import styled from "styled-components";
 import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -62,8 +62,10 @@ class Home extends React.Component {
             </Col>
             )}
           </Row>
-          
         </Container>
+        <WebFooter>
+          <FooterText>2021-EmiyaWu製作</FooterText>
+        </WebFooter>
       </div>
       
     )
@@ -77,6 +79,19 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps)(Home);
+
+const FooterText = styled.div`
+  text-align: center;
+`;
+
+const WebFooter = styled.div`
+  background-color: gray;
+  bottom: 0;
+  width: 100%;
+  ${media.lg`
+    position: absolute;
+  `}
+`;
 
 const CustomizeCard = styled(Card)`
   margin-bottom: 30px;

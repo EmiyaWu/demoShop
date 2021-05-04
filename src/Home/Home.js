@@ -13,7 +13,7 @@ class Home extends React.Component {
   handleAmountCalculate = (commodityInformation) => {
     this.props.dispatch({type: "GETDATA", data: commodityInformation})
   }
-// test
+
   render() {
     const { shopAmount,  commodityData} = this.props;
     

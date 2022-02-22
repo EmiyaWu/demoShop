@@ -5,7 +5,8 @@ const initialState = {
         {id:3, commodityName: "起司飯糰", price: 40, singleItemTotalPrice:40, commodityimg:"./picture/cheese.jpg", commodityAmount: 10, amountValue: [],selectValue: 1},
         {id:4, commodityName: "素食飯糰", price: 55, singleItemTotalPrice:55, commodityimg:"./picture/Vegetarianfood.jpg", commodityAmount: 10, amountValue: [],selectValue: 1},
         {id:5, commodityName: "綜合飯糰", price: 60, singleItemTotalPrice:60, commodityimg:"./picture/comprehensive.jpg", commodityAmount: 10, amountValue: [],selectValue: 1},
-        {id:6, commodityName: "蹦丸紅茶", price: 10, singleItemTotalPrice:10, commodityimg:"./picture/blacktea.jpg", commodityAmount: 20, amountValue: [],selectValue: 1}
+        {id:6, commodityName: "蹦丸紅茶", price: 10, singleItemTotalPrice:10, commodityimg:"./picture/blacktea.jpg", commodityAmount: 20, amountValue: [],selectValue: 1},
+        
     ],
     carData: [],
     shopAmount: 0,

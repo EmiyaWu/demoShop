@@ -18,7 +18,7 @@ class Home extends React.Component {
     const { shopAmount,  commodityData} = this.props;
     
     return (
-      <div>
+      <HomeContainer>
         <HeadContainer>
           <Container>
             <Row>
@@ -45,7 +45,7 @@ class Home extends React.Component {
           </Container>
         </Jumbotron>
         
-        <Container>
+        <CustomizeContainer>
           <Row>
             {commodityData.map((data) =>  
               <Col col={12} sm={6} md={4} lg={3} key={data.id}>
@@ -62,11 +62,11 @@ class Home extends React.Component {
             </Col>
             )}
           </Row>
-        </Container>
+        </CustomizeContainer>
         <WebFooter>
           <FooterText>2021-EmiyaWu製作</FooterText>
         </WebFooter>
-      </div>
+      </HomeContainer>
       
     )
   }
@@ -86,16 +86,17 @@ const FooterText = styled.div`
 
 const WebFooter = styled.div`
   background-color: gray;
-  bottom: 0;
   width: 100%;
-  ${media.lg`
-    position: absolute;
-  `}
 `;
 
 const CustomizeCard = styled(Card)`
   margin-bottom: 30px;
 `;
+
+const CustomizeContainer = styled(Container)`
+  flex:1;
+`;
+
 
 const NavLink = styled(Link)`
   color: rgba(255,255,255,.5);
@@ -126,4 +127,10 @@ const CustomizeNavbar = styled(Navbar)`
 
 const HeadContainer = styled.div`
   background-color: #343a40;
-`
+`;
+
+const HomeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;

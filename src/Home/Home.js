@@ -47,10 +47,10 @@ class Home extends React.Component {
         
         <CustomizeContainer>
           <Row>
-            {commodityData.map((data) =>  
+            {commodityData.map((data) =>
               <Col col={12} sm={6} md={4} lg={3} key={data.id}>
                 <CustomizeCard>
-                  <Card.Img variant="top" src={data.commodityimg} />
+                  <Card.Img variant="top" src={data.commodityimg}/>
                   <Card.Body>
                     <Card.Title>{data.commodityName}</Card.Title>
                     <Card.Text>

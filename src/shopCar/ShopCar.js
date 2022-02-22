@@ -31,7 +31,7 @@ class ShopCar extends React.Component {
     })
 
     return (
-      <div>
+      <ShopCarContainer>
         <HeadContainer>
           <Container>
             <Row>
@@ -55,7 +55,7 @@ class ShopCar extends React.Component {
           </Container>
         </Jumbotron>
 
-        <Container>
+        <BuyContainer>
           <Row>
             <Col col>
               <BuyCommodityContainer>
@@ -110,8 +110,14 @@ class ShopCar extends React.Component {
               </BuyCommodityContainer>
             </Col>
           </Row>
-        </Container>
-      </div>
+
+          
+        </BuyContainer>
+
+        <WebFooter>
+            <FooterText>2021-EmiyaWu製作</FooterText>
+        </WebFooter>
+      </ShopCarContainer>
       
     )
   }
@@ -121,6 +127,15 @@ const mapStateToProps = state => ({
   carData: state.carData
 })
 export default connect(mapStateToProps)(ShopCar);
+
+const FooterText = styled.div`
+  text-align: center;
+`;
+
+const WebFooter = styled.div`
+  background-color: gray;
+  width: 100%;
+`;
 
 const TotalContainer = styled.div`
   display: flex;
@@ -182,6 +197,10 @@ const BuyCommodityContainer = styled.div`
   
 `;
 
+const BuyContainer = styled(Container)`
+  flex: 1;
+`;
+
 const NoCommodity = styled.div`
   text-align: center;
   font-weight: bold;
@@ -211,4 +230,10 @@ const CustomizeNavbar = styled(Navbar)`
 
 const HeadContainer = styled.div`
   background-color: #343a40;
+`
+
+const ShopCarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 `
